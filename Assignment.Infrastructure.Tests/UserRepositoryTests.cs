@@ -37,6 +37,14 @@ public sealed class UserRepositoryTests : IDisposable
     }
 
     [Fact]
+    public void Create_existing_UserCreateDTO_Returns_Response_Conflict()
+    {
+        var (response, userID) = _repository.Create(new UserCreateDTO("Bob", "something@"));
+        response.Should().Be(Response.Conflict);
+        userID.Should().Be(1);
+    }
+
+    [Fact]
     public void Delete_given_UserID_Returns_Response_Deleted()
     {
         var response = _repository.Delete(1, true);

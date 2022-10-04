@@ -14,6 +14,9 @@ public class UserRepository : IUserRepository
     }
     public (Response Response, int UserId) Create(UserCreateDTO user)
     {
+        var exist = Read().FirstOrDefault(a => a.Name == user.Name && a.Email == user.Email);
+        if (exist != null) return (Response.Conflict, exist.Id);
+
         User u = new(user.Name, user.Email);
 
         //Id serialization
