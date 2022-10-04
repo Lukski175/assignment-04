@@ -39,7 +39,7 @@ public sealed class UserRepositoryTests : IDisposable
     [Fact]
     public void Delete_given_UserID_Returns_Response_Deleted()
     {
-        var response = _repository.Delete(1);
+        var response = _repository.Delete(1, true);
         response.Should().Be(Response.Deleted);
     }
 
@@ -59,15 +59,15 @@ public sealed class UserRepositoryTests : IDisposable
     [Fact]
     public void Read_given_UserID_Returns_UserDTO()
     {
-        //var response = _repository.Read(2);
-        //response.Should().Be(new UserDTO(2, "Frederick", "anotherthing@"));
+        var response = _repository.Find(2);
+        response.Should().Be(new UserDTO(2, "Frederick", "anotherthing@"));
     }
 
     [Fact]
     public void ReadAll_Returns_IReadOnlyCollection()
     {
-        //var response = _repository.ReadAll();
-        //response.Should().BeEquivalentTo(new List<UserDTO>() { new UserDTO(1, "Bob", "something@"), new UserDTO(2, "Frederick", "anotherthing@") });
+        var response = _repository.Read();
+        response.Should().BeEquivalentTo(new List<UserDTO>() { new UserDTO(1, "Bob", "something@"), new UserDTO(2, "Frederick", "anotherthing@") });
     }
 
     [Fact]
