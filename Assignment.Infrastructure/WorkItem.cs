@@ -6,6 +6,8 @@ public class WorkItem
 
     public string Title { get; set; }
 
+    public string? Description { get; set; }
+
     public int? AssignedToId { get; set; }
 
     public User? AssignedTo { get; set; }
@@ -13,6 +15,10 @@ public class WorkItem
     public State State { get; set; }
 
     public ICollection<Tag> Tags { get; set; }
+
+    public DateTime Created { get; set; }
+
+    public DateTime StateUpdated { get; set; }
 
     public WorkItem(string title)
     {
